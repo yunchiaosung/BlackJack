@@ -1,0 +1,40 @@
+<!DOCTYPE body PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<body style="font-family: monospace">
+	op:
+	<select id='op'>
+		<option value="List">List</option>
+		<option value="Add">Add</option>
+		<option value="Join">Join</option>
+		<option value="Get">Get</option>
+		<option value="Start">Start</option>
+		<option value="Hit">Hit</option>
+		<option value="Stand">Stand</option>
+		<option value="Win">Win</option>
+		<option value="Help">Help</option>
+	</select> game id:
+	<input type='text' id='gid' /> player id:
+	<input type='text' id='pid' />
+	<a href='#' id='send'>send</a>
+	<br />
+	<textarea rows="24" cols="80" disabled id='console'></textarea>
+
+	<script>
+		$('#send').click(function() {
+			var op = $('#op')[0].value;
+			var gid = $('#gid')[0].value;
+			var pid = $('#pid')[0].value;
+			$.ajax({
+				url : '/?op=' + op + '&gid=' + gid + '&pid=' + pid,
+				success : function(response) {
+					$('#console')[0].value += response;
+				}
+			});
+		});
+	</script>
+</body>
+</html>
